@@ -63,12 +63,17 @@ function ProviderDetails() {
   };
 
   const getFileUrl = (filePath) => {
-    if (!filePath) return null;
+  if (!filePath) return null;
 
-    const fileName = filePath.split("\\").pop().split("/").pop();
+  const fileName = filePath.split("\\").pop().split("/").pop();
 
-    return `http://localhost:5000/uploads/${fileName}`;
-  };
+  const backendUrl = (
+    import.meta.env.VITE_API_URL ||
+    "http://localhost:5000/api"
+  ).replace("/api", "");
+
+  return `${backendUrl}/uploads/${fileName}`;
+};
 
   if (loading) {
     return (
